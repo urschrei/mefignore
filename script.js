@@ -63,18 +63,12 @@ function kill(users) {
         users_arr[i] = users_arr[i].replace(" ","%2b").toLowerCase();
     }
     // to-do: strip leading and trailing whitespace
-    var cleanList = "'" + users_arr.join(
-"' or translate(@href,\
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZ',\
-'abcdefghijklmnopqrstuvwxyz')='")
-    + "'";
-    //matchTable = "//div[span[a[text()=\
-//" + cleanList + "]]]";
+    var cleanList = "'" + users_arr.join("') or contains(.,'") + "'";
     matchTable = "//*[\
-(self::a and following-sibling::*[1][self::div and span/a=" + cleanList + "]) or \
-(self::div and span/a=" + cleanList + ") or \
-(self::br and preceding-sibling::*[1][self::div and span/a=" + cleanList + "]) or \
-(self::br and preceding-sibling::*[2][self::div and span/a=" + cleanList + "])]";
+(self::a and following-sibling::*[1][self::div and span/a[contains(.," + cleanList +")]]) or \
+(self::div and span/a[contains(.," + cleanList + ")]) or \
+(self::br and preceding-sibling::*[1][self::div and span/a[contains(.," + cleanList + ")]]) or \
+(self::br and preceding-sibling::*[2][self::div and span/a[contains(.," + cleanList + ")]])]";
     allTables = document.evaluate(
         matchTable,
         document,

@@ -49,7 +49,7 @@ is a bug, and am proceeding with ignored-user comment removal anyway.");
     } else
     //no stored values were found, and the default is in use, so alert the user
     alert("You haven't defined any users to ignore, please go to the MefIgnore extension preferences,\
-and add some (use lowercase for user names).");
+and add some.");
 
 }
 

@@ -59,8 +59,8 @@ is a bug, and am proceeding with ignored-user comment removal anyway.");
         //stored values exist, so use those, and restore them to the user prefs
         console.log("Retrieving local storage blacklist values: ");
         kl = localStorage.getItem("ignorelist");
-        kl = kl.trim();
         //strip leading and trailing whitespace
+        kl = kl.trim();
         console.log("Retrieved values: " + kl + " … restoring your preferences");
         safari.self.tab.dispatchMessage("setSettingValue", "blacklist?" + kl);
         //using ? to delimit in order to avoid splitting the values
@@ -72,16 +72,24 @@ and add some.");
 
 }
 
+function check_comma(str) {
+    // remove a trailing comma from a string
+    var outstr = ((str.charAt(str.length-1,1) == ",") ? str.substring(0, str.length-1) : str);
+      return outstr;
+}
 
 
 function kill(users) {
     var allTables, thisTable, matchTable;
     var users_arr = users.split(",");
-    for (i = 0; i < users_arr.length; i++) {
-        //force the user input to lowercase
-        users_arr[i] = users_arr[i].replace(" ","%2b").toLowerCase();
+    // trim leading whitespace (from e.g. 'user1, user2')
+    for (var i = 0; i < users_arr.length; i++) {
+        users_arr[i] = check_comma(users_arr[i].trim());
+        if (users_arr[i] == "") {
+            //remove an empty string caused by a trailing comma
+            users_arr.splice(i,1);
+        }
     }
-    // to-do: strip leading and trailing whitespace
     var cleanList = "'" + users_arr.join("') or contains(.,'") + "'";
     matchTable = "//*[\
 (self::a and following-sibling::*[1][self::div and span/a[contains(.," + cleanList +")]]) or \

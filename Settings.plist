@@ -8,7 +8,7 @@
 		<key>Key</key>
 		<string>blacklist</string>
 		<key>Title</key>
-		<string>Enter the user names you wish to ignore. Case-sensitive.</string>
+		<string>User names you wish to ignore. Case-sensitive</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>

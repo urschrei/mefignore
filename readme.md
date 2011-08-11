@@ -14,6 +14,10 @@ What this plugin does: removes all comments made by selected users in the thread
 3. Reload MeFi
 4. …and exhale
 
+## License ##
+
+MefIgnore is licensed under version 3 of the GPL.
+
 
 [1]: http://www.metafilter.com
 [2]: https://github.com/urschrei/mefignore/downloads
